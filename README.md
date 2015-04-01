@@ -1,2 +1,2 @@
 # JaggedCloud
-Technical Interview Platform
+Technical Interview Platform application
