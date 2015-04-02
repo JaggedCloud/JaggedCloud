@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/JaggedCloud/JaggedCloud/issues"
   },
-  "homepage": "https://github.com/JaggedCloud/JaggedCloud"
+  "homepage": "https://github.com/JaggedCloud/JaggedCloud",
+  "dependencies": {
+    "express": "^4.12.3",
+    "mongoose": "^4.0.1"
+  }
 }
