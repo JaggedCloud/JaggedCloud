@@ -1,15 +1,12 @@
 <div id="home-container">
-    HELLO WORLD!
-
-    <nav class="navbar navbar-default">
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div>
-          <ul class="nav navbar-nav">
-            <li><a href="#/signin">Sign In</a></li>
-            <li><a href="#/signup">Sign up</a></li>
-          </ul>
-        </div>
-    </nav>
-
+    <div class="container-fluid">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div>
+        <ul>
+          <li ng-controller='signinCtrl'><a ng-click='openModal()' href="#/signin">Sign In</a></li>
+          <li><a ng-click='logout()' href="#/logout">Logout</a></li>
+          <li><a href="#/room">Go to Room</a></li>
+        </ul>
+      </div>
+    </div><!-- /.container-fluid -->
 </div>

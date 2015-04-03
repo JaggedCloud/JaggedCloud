@@ -1,0 +1,41 @@
+body { 
+    padding-top: 70px;
+}
+
+#room-container{
+    position:absolute;
+    border:3px solid red;
+    width:100%;
+    height:100%;
+}
+.textEditor-container{
+    position:relative;
+    margin: 10px;
+    width: 50%;
+    height: 50%;
+    border:3px solid green;
+}
+
+.video-container{
+    position:relative;
+    margin: 10px;
+    bottom:0;
+    right:0;
+    float:left;
+}
+
+.userVideo {
+    height: 50px;
+    width: 50px;
+    float: left;
+    border:5px solid orange;
+    position: absolute;
+}
+
+.peerVideo {
+    height: 200px;
+    width: 200px;
+    border:5px solid blue;
+    position: absolute;
+    z-index: -1;
+}
