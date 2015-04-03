@@ -10,6 +10,11 @@
             controller: 'HomeCtrl',
             templateUrl: 'app/home/home.html',
         })
-  })
+        .state('room', {
+            url: '/room',
+            controller: 'RoomCtrl',
+            templateUrl: 'app/room/room.html'
+        });
+  });
   console.log('App loaded successfully');
 })();
