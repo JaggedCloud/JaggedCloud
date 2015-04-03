@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var mongoURI = 'mongodb://localhost/hackbox';
 var db = mongoose.connection;
+var config = require('congif.js')
 
 
 // CONNECTION: pending to database on local host; need notification if connected successfully or error occured
