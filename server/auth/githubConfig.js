@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
+var User = require('../db/models/userModel.js');
 
 var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
