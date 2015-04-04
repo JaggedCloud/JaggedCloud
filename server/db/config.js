@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var mongoURI = 'mongodb://localhost/hackbox';
 var db = mongoose.connection;
-var config = require('congif.js')
 
 
 // CONNECTION: pending to database on local host; need notification if connected successfully or error occured
@@ -12,3 +11,5 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback){
   console.log('MongoDB connection open!');
 });
+
+// export db and require it in the server

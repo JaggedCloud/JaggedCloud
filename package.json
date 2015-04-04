@@ -37,7 +37,6 @@
     "require": "^2.4.17",
     "express": "^4.12.3",
     "mongoose": "^4.0.1",
-    "morgan": "^1.5.2",
-    "express": "^4.12.3"
+    "morgan": "^1.5.2"
   }
 }

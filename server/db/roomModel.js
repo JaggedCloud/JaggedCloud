@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 // SCHEMAS: each schema maps to a 'collection' in MongoDB (analogous to SQL table) and defines the shape of the 'documents' within that colletion (documents are analogous to a row in a SQL table)
 var roomSchema = mongoose.Schema({
   date_created: {
