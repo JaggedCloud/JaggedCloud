@@ -1,20 +1,13 @@
 var passport = require('./githubConfig.js');
 
-module.exports.signin = function(req, res){
-  console.log(passport);
-    passport.authenticate('github');
-};
+module.exports.signin = passport.authenticate('github');  
 
-module.exports.callback = function(req, res) {
-    passport.authenticate('github', { successRedirect: '/', failureRedirect: '/signin' });
-};
+module.exports.callback = passport.authenticate('github', { failureRedirect: '/signin', successRedirect: '/' });
 
 module.exports.logout = function(req, res) {
-  req.session.destroy(function(err){
-    if (err) console.error('Error destroying session: ' + err);
     req.logout();
+    console.log('Logging out')
     res.redirect('/');
-  });
 }
 
 module.exports.isAuthenticated = function(req, res) {

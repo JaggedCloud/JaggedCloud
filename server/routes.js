@@ -1,4 +1,6 @@
 var morgan = require('morgan');
+var passport = require('passport');
+var session = require('express-session');
 
 module.exports = function(app, express) {
 
@@ -9,6 +11,11 @@ module.exports = function(app, express) {
 
   // http request logger for development 
   app.use(morgan('dev'));
+
+  // initialize passport and sessions
+  // app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(passport.initialize());
+  // app.use(passport.session());
 
   // serve html and css 
   app.use(express.static(__dirname + '/../client'));
