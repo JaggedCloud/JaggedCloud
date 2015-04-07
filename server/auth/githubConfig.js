@@ -34,10 +34,31 @@ passport.use(new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     // my code: 
-    User.findOrCreate({ githubId: profile.id }, function (err, user) {
-          console.log(user);
-          return done(err, user);
+    User.findOne({ githubId: profile.id }, function(err, user) {
+      if(err) {
+        console.error('Error: ', err);
+      }
+      if(!user) {
+        console.log('Trying to create a user: ', user);
+        User.create({ githubId: profile.id, accessToken: accessToken, refreshToken: refreshToken }, function(err, user) {
+          console.log('blah blah blah');
+          if(err) {
+            console.error('Error: ', err);
+          }
+          if(user) {
+            console.log('Creating user');
+          }
+        })
+        .then(function(user) {
+          console.log('Saved user');
+          return done(null, user);
         });
+      } else {
+        console.log('Found user');
+        console.log(user);
+        return done(null, user);
+      }
+    });
 
     // asynchronous verification, for effect...
     // process.nextTick(function () {
