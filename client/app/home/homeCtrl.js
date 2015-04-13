@@ -26,6 +26,8 @@
             candidate: interview.candidateName,
             start_time: new Date(Date.parse(interview.start_time)).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', timeZoneName: 'long'}),
             created_by: interview.created_by,
+            candidateName: interview.candidateName,
+            candidateEmail: interview.candidateEmail,
             roomId: interview.id
           };
 
