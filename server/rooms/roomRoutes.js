@@ -12,4 +12,6 @@ module.exports = function(router){
 
   router.get('/home', roomController.fetchAll);
 
+  router.get('/remove', roomController.remove);
+
 };

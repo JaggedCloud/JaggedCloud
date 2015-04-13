@@ -22,9 +22,9 @@
         </div>
         <div class='interviews-container'>
           <div class='interview' ng-repeat='interview in incompleteInterviews' ng-click='joinRoom(interview)'>
-              <h2 class='company'>{{interview.company}}</h2>
-              <div class='startTime'>@ {{interview.start_time}}</div>
-              <div class='createdBy'>with {{interview.candidate}}</div>
+              <h2 class='candidateName'> {{interview.candidateName}}</h2>
+              <div class='candidateEmail'> {{interview.candidateEmail}}</div>
+              <div class='startTime'> {{interview.start_time}}</div>
           </div>
         </div>
     </div>

@@ -108,6 +108,7 @@ module.exports.fetchAll = function(req, res) {
               start_time: room.start_time,
               is_open: room.is_open,
               candidateName: room.candidateName,
+              candidateEmail: room.candidateEmail,
               id: room._id
             }
             roomsArray.push(roomData);
@@ -123,4 +124,6 @@ module.exports.fetchAll = function(req, res) {
     }
   });
 }
+
+module.exports.remove = function(req, res) {}
 
