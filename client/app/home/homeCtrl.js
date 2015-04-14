@@ -58,7 +58,7 @@
     } 
 
     $scope.remove = function(roomId){
-      Room.deleteRoom(roomId, refreshInterviews);
+      Room.deleteRoom(roomId, $scope.refreshInterviews);
     }
 
     /**
