@@ -9,18 +9,23 @@ module.exports = function(config){
     // files to include, ordered by dependencies
     files : [
       //These are the library dependency files we need to run our tests
+      'client/lib/bower_components/fabric/dist/fabric.js',
       'client/lib/bower_components/angular/angular.min.js',
       'client/lib/bower_components/angular-route/angular-route.min.js',
       'client/lib/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js',
+      'https://cdn.socket.io/socket.io-1.3.3.js',
 
       'https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js',
       //These are the actual files in our codebase we want to test
       'client/app/app.js',
       'client/app/**/*.js',
-      'node_modules/angular-mocks/angular-mocks.js',
- 
+
       //These are the spec unit test files where our tests lives
-      'Spec/unit/home.js'
+      'Spec/unit/home.js',
+      'Spec/unit/room.js',
+      'Spec/unit/drawing.js'
     ],
 
     // files to exclude
@@ -34,7 +39,7 @@ module.exports = function(config){
     frameworks: ['jasmine', 'chai'],
  
     //The browsers we want to test against, we can add others such as ie
-    browsers : ['Chrome', 'PhantomJS', 'Firefox'],
+    browsers : ['Chrome', 'Firefox'], //add Firefox back
  
     //Reports the result of our tests, progress is the default
     reporters: ['progress'],

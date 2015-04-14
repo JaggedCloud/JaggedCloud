@@ -19,10 +19,7 @@
     $scope.roomID = $stateParams.roomId;
     $scope.saving = false;
 
-    // The $destroy event is called when we leave this view
-    $scope.$on('$destroy', function(){
-      $scope.uninit();
-    });
+
 
     /**  
      * Function: RoomCtrl.init()
@@ -55,6 +52,11 @@
     $scope.uninit = function(){
       console.log('Leaving Room!');
     };
+
+    // The $destroy event is called when we leave this view
+    $scope.$on('$destroy', function(){
+      $scope.uninit();
+    });
 
     /**
      * Function: RoomCtrl.saveData()
