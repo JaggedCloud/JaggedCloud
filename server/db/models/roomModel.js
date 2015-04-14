@@ -10,6 +10,11 @@ var roomSchema = new mongoose.Schema({
     default: false,
   },
 
+  is_writable: {
+    type: Boolean,
+    default: true
+  }
+
   date_created: {
     type: Date,
     default: Date.now
