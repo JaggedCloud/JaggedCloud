@@ -100,9 +100,8 @@ module.exports.fetchAll = function(req, res) {
         Room.findById(rooms[i], function(err, room){
           if (err) { 
             handleError(err); 
-            roomsArray.push(null);
           }
-          else {
+          else if (room) {
             var roomData = {
               created_by: room.created_by,
               start_time: room.start_time,
@@ -114,6 +113,9 @@ module.exports.fetchAll = function(req, res) {
               canvas: room.canvas
             }
             roomsArray.push(roomData);
+          }
+          else {
+            roomsArray.push(null);
           }
           if (roomsArray.length === rooms.length) {
             console.log('ROOMS ARRAY: ', roomsArray);
@@ -129,17 +131,35 @@ module.exports.fetchAll = function(req, res) {
 }
 
 
-// this one is req.BODY.id because we are using a delete request (so not sending a bodya)
+// this one is req.BODY.id because we are using a delete request (so not sending a body)
 module.exports.remove = function(req, res) {
-  var roomId = req.params.roomId;
+  var roomId = req.params.id;
+  var githubId = req.user;
   Room.findOneAndRemove({_id: roomId}, function(err, room) {
     if (err) { 
       handleError(err); 
       res.send(404, 'room not found');
     }
-    else{
+    else {
+      User.findOne({github_id: githubId}, function(err, user){
+        if (err) { 
+          handleError(err); 
+          res.send(404, 'user not found');
+        }
+        else {
+          var rooms = user.rooms;
+          for (var i = 0; i < rooms.length; i++) {
+            if (rooms[i] === roomId) {
+              rooms.splice(i, 1);
+            }
+          }
+        }
+      });
       res.send(200, 'room deleted');
     }
   });
 }
+
+
+
 
