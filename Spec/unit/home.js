@@ -18,7 +18,7 @@ describe('homeCtrl', function() {
     it('should have all the necessary methods', function() {
       var $scope = {};
       var controller = $controller('homeCtrl', { $scope: $scope});
-
+      console.log($scope);
       expect($scope.logout).to.not.be.undefined;
     });
   });
