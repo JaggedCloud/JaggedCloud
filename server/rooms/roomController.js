@@ -15,12 +15,18 @@ module.exports.create = function(req, res) {
   var isOpen = Date.now() >= Date.parse(startTime);
 
   Room.create({ created_by: githubId, start_time: startTime, is_open: isOpen, candidateName: name, candidateEmail: email }, function(err, room){
-    if (err) { handleError(err); }
+    if (err) {
+      handleError(err);
+      res.send(404, 'room not found');
+    }
     else if (room) {
       console.log('room successfully created!');
 
       User.findOneAndUpdate({github_id: githubId}, {$push: {rooms: [room._id]}}, {upsert: true}, function(err, user){
-        if (err) { handleError(err); }
+        if (err) {
+          handleError(err);
+          res.send(404, 'user not found');
+        }
         else if (user) {
           console.log('successfully added new room to user!' + user);
         }
