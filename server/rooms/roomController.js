@@ -22,7 +22,7 @@ module.exports.create = function(req, res) {
     else if (room) {
       console.log('room successfully created!');
 
-      User.findOneAndUpdate({github_id: githubId}, {$push: {rooms: [room._id]}}, {upsert: true}, function(err, user){
+      User.findOneAndUpdate({github_id: githubId}, {$push: {rooms: room._id}}, {upsert: true}, function(err, user){
         if (err) {
           handleError(err);
           res.send(404, 'user not found');
@@ -55,13 +55,13 @@ module.exports.save = function(req, res) {
 };
 
 // need to use req.PARAMS.id here because this is a get request
-// TODO: complete candidateRoom object that contains only the data the the candidate should see
+// maybe: complete candidateRoom object that contains only the data the the candidate should see
+// (right now they're the same, but may add box for taking notes)
 module.exports.fetchOne = function(req, res) {
   var roomId = req.params.id;
   var githubId = req.user;
 
   Room.findById(roomId, function(err, room){
-    console.log('ROOM: ',room);
     // var canvas = room.canvas;
     // var text = room.text;
     // var candidateRoom = {
@@ -121,10 +121,12 @@ module.exports.fetchAll = function(req, res) {
             roomsArray.push(roomData);
           }
           else {
-            roomsArray.push(null);
+// TODO: we were pushing null into array -- caused error
+  // on the front end need to check first if array !null
+  // Also, I think the room isn't getting deleted from the user's rooms array
+            roomsArray.push({});
           }
           if (roomsArray.length === rooms.length) {
-            console.log('ROOMS ARRAY: ', roomsArray);
             res.send(202, roomsArray);
           }
         });
@@ -146,22 +148,25 @@ module.exports.remove = function(req, res) {
       handleError(err); 
       res.send(404, 'room not found');
     }
-    else {
+    else if (room) {
+
       User.findOne({github_id: githubId}, function(err, user){
         if (err) { 
           handleError(err); 
           res.send(404, 'user not found');
         }
-        else {
+        else if (user) {
           var rooms = user.rooms;
           for (var i = 0; i < rooms.length; i++) {
             if (rooms[i] === roomId) {
               rooms.splice(i, 1);
+              user.rooms = rooms;
             }
           }
+          user.save();
         }
       });
-      res.send(200, 'room deleted');
+      res.send(200, room);
     }
   });
 }

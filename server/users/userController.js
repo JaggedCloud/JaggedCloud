@@ -6,7 +6,7 @@ var handleError = function(error) {
 };
 
 
-
+// For the profile page -- fetch one user to display all of their past interviews
 module.exports.fetchOne = function(req, res){
   var githubId = req.user;
   User.findOne({'githubId': githubId}, function(err, user){
