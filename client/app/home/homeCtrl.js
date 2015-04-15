@@ -58,7 +58,7 @@
     } 
 
     $scope.remove = function(roomId){
-      Room.deleteRoom(roomId, refreshInterviews);
+      Room.deleteRoom(roomId, $scope.refreshInterviews);
     }
 
     /**
@@ -71,6 +71,7 @@
         $scope.incompleteInterviews = [];
         // Populate incompleteInterviews with snapshot
         response.data.forEach(function(interview){
+          console.log(interview);
           var interview = {
             displayedStart_time: new Date(Date.parse(interview.start_time)).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', weekday: 'short', year: 'numeric', month: 'long', day: 'numeric', timeZoneName: 'long'}),
             start_time: Date.parse(interview.start_time),
