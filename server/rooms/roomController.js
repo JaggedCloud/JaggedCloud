@@ -15,12 +15,18 @@ module.exports.create = function(req, res) {
   var isOpen = Date.now() >= Date.parse(startTime);
 
   Room.create({ created_by: githubId, start_time: startTime, is_open: isOpen, candidateName: name, candidateEmail: email }, function(err, room){
-    if (err) { handleError(err); }
+    if (err) {
+      handleError(err);
+      res.send(404, 'room not found');
+    }
     else if (room) {
       console.log('room successfully created!');
 
-      User.findOneAndUpdate({github_id: githubId}, {$push: {rooms: [room._id]}}, {upsert: true}, function(err, user){
-        if (err) { handleError(err); }
+      User.findOneAndUpdate({github_id: githubId}, {$push: {rooms: room._id}}, {upsert: true}, function(err, user){
+        if (err) {
+          handleError(err);
+          res.send(404, 'user not found');
+        }
         else if (user) {
           console.log('successfully added new room to user!' + user);
         }
@@ -49,13 +55,13 @@ module.exports.save = function(req, res) {
 };
 
 // need to use req.PARAMS.id here because this is a get request
-// TODO: complete candidateRoom object that contains only the data the the candidate should see
+// maybe: complete candidateRoom object that contains only the data the the candidate should see
+// (right now they're the same, but may add box for taking notes)
 module.exports.fetchOne = function(req, res) {
   var roomId = req.params.id;
   var githubId = req.user;
 
   Room.findById(roomId, function(err, room){
-    console.log('ROOM: ',room);
     // var canvas = room.canvas;
     // var text = room.text;
     // var candidateRoom = {
@@ -100,9 +106,8 @@ module.exports.fetchAll = function(req, res) {
         Room.findById(rooms[i], function(err, room){
           if (err) { 
             handleError(err); 
-            roomsArray.push(null);
           }
-          else {
+          else if (room) {
             var roomData = {
               created_by: room.created_by,
               start_time: room.start_time,
@@ -115,8 +120,13 @@ module.exports.fetchAll = function(req, res) {
             }
             roomsArray.push(roomData);
           }
+          else {
+// TODO: we were pushing null into array -- caused error
+  // on the front end need to check first if array !null
+  // Also, I think the room isn't getting deleted from the user's rooms array
+            roomsArray.push({});
+          }
           if (roomsArray.length === rooms.length) {
-            console.log('ROOMS ARRAY: ', roomsArray);
             res.send(202, roomsArray);
           }
         });
@@ -129,17 +139,38 @@ module.exports.fetchAll = function(req, res) {
 }
 
 
-// this one is req.BODY.id because we are using a delete request (so not sending a bodya)
+// this one is req.BODY.id because we are using a delete request (so not sending a body)
 module.exports.remove = function(req, res) {
-  var roomId = req.params.roomId;
+  var roomId = req.params.id;
+  var githubId = req.user;
   Room.findOneAndRemove({_id: roomId}, function(err, room) {
     if (err) { 
       handleError(err); 
       res.send(404, 'room not found');
     }
-    else{
-      res.send(200, 'room deleted');
+    else if (room) {
+
+      User.findOne({github_id: githubId}, function(err, user){
+        if (err) { 
+          handleError(err); 
+          res.send(404, 'user not found');
+        }
+        else if (user) {
+          var rooms = user.rooms;
+          for (var i = 0; i < rooms.length; i++) {
+            if (rooms[i] === roomId) {
+              rooms.splice(i, 1);
+              user.rooms = rooms;
+            }
+          }
+          user.save();
+        }
+      });
+      res.send(200, room);
     }
   });
 }
+
+
+
 

@@ -10,6 +10,6 @@ module.exports = function(router){
 
   router.get('/home', roomController.fetchAll);
 
-  router.get('/remove:id', roomController.remove);
+  router.delete('/remove:id', roomController.remove);
 
 };
