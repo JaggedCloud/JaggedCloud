@@ -56,7 +56,7 @@ module.exports.save = function(req, res) {
 
 // need to use req.PARAMS.id here because this is a get request
 // maybe: complete candidateRoom object that contains only the data the the candidate should see
-// (right now they're the same, but may add box for taking notes)
+// (right now they're the same, but may add box for interviewer to take notes)
 module.exports.fetchOne = function(req, res) {
   var roomId = req.params.id;
   var githubId = req.user;

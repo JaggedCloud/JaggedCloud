@@ -20,7 +20,6 @@ module.exports.fetchOne = function(req, res){
       var userEmail = user.email;
       var rooms = user.rooms;
       var closedRooms = [];
-
       for (var i = 0; i < rooms.length; i++) {
         var roomID = rooms[i]
         Room.findById(roomID, function(err, room){
@@ -39,7 +38,6 @@ module.exports.fetchOne = function(req, res){
           }
         });
       }
-
       var userData = {
         closedRooms: closedRooms,
         photo: profilePhoto,
