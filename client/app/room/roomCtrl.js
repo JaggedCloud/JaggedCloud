@@ -19,7 +19,7 @@
     $scope.roomID = $stateParams.roomId;
     $scope.saving = false;
     $scope.saveInterval = null;
-    var AUTOSAVE_FREQUENCY_MS = 10000;
+    var AUTOSAVE_FREQUENCY_MS = 60000;
 
     // The $destroy event is called when we leave this view
     $scope.$on('$destroy', function(){
