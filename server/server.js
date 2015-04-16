@@ -32,13 +32,19 @@ var server = http.createServer(app).listen(port, function() {
 //We can also send events to ALL sockets via io.emit
 var io = require('socket.io').listen(server);
 
-io.on('connection', function(socket) {
-  console.log('a user connected');
-  io.emit('greeting', 'HELLO WORLD heres some data from sockets!');
-  socket.on('disconnect', function(){
-      console.log('user disconnected');
+io.sockets.on('connection', function(socket) {
+  console.log(' a user connected');
+  //join to room and save room name
+  socket.emit('greeting', 'HELLO WORLD heres some data from sockets!');
+  socket.on('join room', function(room) {
+    console.log('joining particular room', room)
+    socket.join(room.roomName);
+    socket.ROOMPROP = room.roomName
   });
+
   socket.on('coords', function(data) {
-    socket.broadcast.emit('coordinates', data);
+    console.log('ROOOOOOOOM', socket.room, socket);
+    socket.to(socket.ROOMPROP).broadcast.emit('coordinates', data);
   });
 });
+

@@ -15,7 +15,8 @@
     var socket = io.connect();
     var instance = {
       on: on,
-      emit: emit
+      emit: emit,
+      disconnect: disconnect
     };
     return instance;
 
@@ -46,6 +47,11 @@
           callback.apply(socket, args);  
         }     
       });
+    }
+
+    function disconnect() {
+      console.log('disconnecting socket');
+      socket.disconnect();
     }
   }
 })();

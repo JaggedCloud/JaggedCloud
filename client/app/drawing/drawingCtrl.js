@@ -43,6 +43,10 @@
       Drawing.initializeIO();
     };
 
+    $scope.stopIOListeners = function() {
+      
+    };
+
     /**
      * Function: DrawingCtrl.addCanvas()
      * This function adds a new Fabric Canvas to the DOM
