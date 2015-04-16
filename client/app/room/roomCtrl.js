@@ -125,7 +125,31 @@
         TextEditor.resizeAllEditors();
       }
     };
-    //////////////////   End Room Methods   //////////////////
+    $scope.clearCanvas = function() {
+      Drawing.clearCanvas();
+    };
+    $scope.toggleEraser = function() {
+      Drawing.toggleEraser();
+    };
+    /////////////// Helper Functions ///////////////
+    /**
+     * Function: assignKBShortcuts()
+     * This function will assign the KB shortcut for saving to the editor. 
+     */
+    function assignKBShortcuts(){
+      // Assign the save keyboard shortcut to each editor
+      TextEditor.getEditors().forEach(function(editor){
+          editor.editor.commands.addCommand({  name: 'saveFile',
+                                        bindKey: {
+                                        win: 'Ctrl-S',
+                                        mac: 'Command-S',
+                                        sender: 'editor|cli'
+                                     },
+                                      exec: $scope.saveData
+          });
+      });
+    }
+    /////////////// End Helper Functions ///////////////
 
     // Call the initialize function
     console.log('Joining Interview with ID: ' + $stateParams.roomId);

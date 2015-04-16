@@ -44,7 +44,7 @@
     };
 
     $scope.stopIOListeners = function() {
-      
+      Drawing.stopIO();
     };
 
     /**
@@ -55,9 +55,12 @@
       $scope.drawingCanvas = Drawing.makeCanvas();
     };
 
+    $scope.toggleErasing = function() {
+      Drawing.toggleErasing();
+    };
+
     $scope.toggleDrawingMode = function() {
       $scope.drawingCanvas.isDrawingMode = !$scope.drawingCanvas.isDrawingMode;
-     
     };
     $scope.init();
   }

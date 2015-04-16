@@ -17,14 +17,17 @@
     var _fabricCanvas = null;
     var _socket = null;
     var _intervalID = null;
+    var _currentlyErasing = false;
 
     var instance = {
       makeCanvas: makeCanvas,
       initializeIO: initializeIO,
       stopIO: stopIO,
-      removeCanvas: removeCanvas,
+      clearCanvas: clearCanvas,
       getCanvas: getCanvas,
-      updateCanvas: updateCanvas
+      toggleEraser: toggleEraser,
+      updateCanvas: updateCanvas,
+      removeCanvas: removeCanvas
     };
 
     return instance;
@@ -55,6 +58,11 @@
       return _fabricCanvas;
     }
 
+    function clearCanvas() {
+      _fabricCanvas.clear();
+      Sockets.emit('clearCanvas');
+    }
+
     function initializeIO() {
       console.log('Initializing Sockets IO');
       _socket = io();
@@ -65,8 +73,25 @@
       });
 
       Sockets.on('coordinates', updateCanvas);
-      _fabricCanvas.on('mouse:down', sendData); 
-      _fabricCanvas.on('mouse:up', clearData);       
+      Sockets.on('clearCanvas', function() {
+        _fabricCanvas.clear();
+      });
+      _fabricCanvas.on('mouse:up', sendData);       
+    }
+
+    function toggleEraser() {
+     if (_currentlyErasing ) {
+      _fabricCanvas.freeDrawingBrush = new fabric['Pencil' + 'Brush'](_fabricCanvas);
+      _fabricCanvas.freeDrawingBrush.width = 1;
+      _fabricCanvas.freeDrawingBrush.color = '#000000';
+      _currentlyErasing = !_currentlyErasing;
+
+     } else {
+      _fabricCanvas.freeDrawingBrush = new fabric['Circle' + 'Brush'](_fabricCanvas);
+      _fabricCanvas.freeDrawingBrush.width = 20;
+      _fabricCanvas.freeDrawingBrush.color = '#FFFFFF';      
+      _currentlyErasing = !_currentlyErasing;
+     }
     }
 
     function stopIO() {
@@ -106,20 +131,11 @@
     //This happens on every mousemove (really mouseup)
     function updateCanvas(data) {
       _fabricCanvas.loadFromJSON(data, _fabricCanvas.renderAll.bind(_fabricCanvas));
+      // _fabricCanvas.renderAll();
     }
 
-    function sendData(options) {
-      _intervalID = setInterval(function() {
-        var json = JSON.stringify( _fabricCanvas.toJSON() );
-        Sockets.emit('coords', json);
-        console.log('emit!');
-      }, 50);
-    }
-
-    function clearData() {
-      console.log('interval cleared');
-      clearInterval(_intervalID);
-      var json = JSON.stringify( _fabricCanvas.toJSON() );
+    function sendData() {
+      var json = JSON.stringify( _fabricCanvas.toJSON());
       Sockets.emit('coords', json);
     }
   }

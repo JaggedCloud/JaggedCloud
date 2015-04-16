@@ -4,6 +4,9 @@
     <li class="divider-vertical"><a ng-click='logout()' href="/auth/logout">Logout</a></li>
     <li class="divider-vertical"><a ng-click="saveData()">Save</a></li>
     <li class="divider-vertical" ng-show='saving'><img class='loading_spinner' src="../assets/loading_spinner.gif" ng-show='saving'>Saving...</img></li>
+    <li class="divider-vertical"><a ng-click="clearCanvas()">Clear Canvas</a></li>
+    <li class="divider-vertical"><a ng-click="toggleEraser()">Toggle Eraser</a></li>
+    <li class="divider-vertical"><img class='loading_spinner' src="../assets/loading_spinner.gif" ng-show='saving'></img></li>
   </ul>
     <div ng-controller='textEditorCtrl'>
         <div class="tab-box"> 
