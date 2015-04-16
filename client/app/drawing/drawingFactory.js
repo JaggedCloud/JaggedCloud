@@ -11,9 +11,9 @@
     .module('hackbox')
     .factory('Drawing', Drawing);
 
-  Drawing.$inject = ['Sockets'];
+  Drawing.$inject = ['Sockets', '$stateParams'];
 
-  function Drawing(Sockets) {
+  function Drawing(Sockets, $stateParams) {
     var _fabricCanvas = null;
     var _socket = null;
     var _intervalID = null;
@@ -21,6 +21,7 @@
     var instance = {
       makeCanvas: makeCanvas,
       initializeIO: initializeIO,
+      stopIO: stopIO,
       removeCanvas: removeCanvas,
       getCanvas: getCanvas,
       updateCanvas: updateCanvas
@@ -58,8 +59,9 @@
       console.log('Initializing Sockets IO');
       _socket = io();
 
-      Sockets.on('init', function (initialData) {
+      Sockets.on('greeting', function (initialData) {
        console.log('Socket connection initialized!', initialData);
+       Sockets.emit('join room', {roomName: $stateParams.roomId});
       });
 
       Sockets.on('coordinates', updateCanvas);
@@ -67,9 +69,10 @@
       _fabricCanvas.on('mouse:up', clearData);       
     }
 
-    function getCanvas(){
-      return _fabricCanvas;
+    function stopIO() {
+      Sockets.stopIO();
     }
+
     /**
      * Function: Drawing.getCanvas()
      * This function is a getter for the canvas. 
