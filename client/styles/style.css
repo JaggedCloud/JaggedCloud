@@ -277,3 +277,11 @@ a:visited:hover {
   font-size: 22px;
   width: 50%;
 }
+
+.savingData{
+  transition-duration: 3s;
+}
+
+
+
+

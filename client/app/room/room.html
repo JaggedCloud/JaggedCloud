@@ -3,12 +3,8 @@
     <li class="divider-vertical title"><a href="#/">HackBox</a></li>
     <li class="divider-vertical"><a ng-click='logout()' href="/auth/logout">Logout</a></li>
     <li class="divider-vertical"><a ng-click='toggleCanvas()'>Toggle Canvas</a></li>
-    <li class="divider-vertical"><a ng-click="saveData()">Save Data</a></li>
-    <!-- this is old logic for saving spinner -->
-    <!-- <li class="divider-vertical"><img class='loading_spinner' src="../assets/loading_spinner.gif" ng-show='saving'></img></li> -->
-    <!-- display 'saving...' instead of spinner -->
-    <!-- only shows up for less than a second!!!!!!! gah -->
-    <li class="divider-vertical"><span ng-show='saving'>saving...</span></li>
+    <li class="divider-vertical"><a ng-click="saveData()">Save</a></li>
+    <li class="divider-vertical" ng-show='saving'><img class='loading_spinner' src="../assets/loading_spinner.gif" ng-show='saving'>Saving...</img></li>
   </ul>
     <div ng-controller='textEditorCtrl' ng-show='!showCanvas' class='textEditor-container'>
         <div class="tab-box"> 
