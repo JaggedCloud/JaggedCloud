@@ -32,8 +32,12 @@
             resolve: {
               authenticated: authenticated
             }
+        })
+        .state('demo', {
+            url: '/demo/:roomId',
+            controller: 'roomCtrl',
+            templateUrl: 'app/room/room.html'
         });
-
         // Attach token to all requests
         // $httpProvider.interceptors.push('AttachTokens');
   })

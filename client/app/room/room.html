@@ -1,19 +1,16 @@
 <div id="room-container">
   <ul class="nav nav-tabs navbar">
     <li class="divider-vertical title"><a href="#/">HackBox</a></li>
-    <li class="divider-vertical"><a ng-click='logout()' href="/auth/logout">Logout</a></li>
     <li class="divider-vertical"><a ng-click="saveData()">Save</a></li>
     <li class="divider-vertical" ng-show='saving'><img class='loading_spinner' src="../assets/loading_spinner.gif" ng-show='saving'>Saving...</img></li>
     <li class="divider-vertical"><a ng-click="clearCanvas()">Clear Canvas</a></li>
     <li class="divider-vertical"><a ng-click="toggleEraser()">Toggle Eraser</a></li>
   </ul>
-    <div ng-controller='textEditorCtrl'>
-        <div class="tab-box"> 
+    <div class="tab-box" ng-controller='textEditorCtrl'>
             <div ng-class='{"tab-container": !editor.tab.active, "activeTab-container": editor.tab.active}' ng-click="toggleCanvas(true); setActiveEditor(editor.id)" ng-repeat='editor in editors'>
                 <div ng-class='{tab: !editor.tab.active, activeTab: editor.tab.active}'>{{editor.tab.name}}</div>
                 <a class='removeEditor-button' ng-click='removeTextEditor(editor.id); saveData(); $event.stopPropagation();'></a>
             </div> 
-        </div>
         <div ng-click='deactivateTabs(); toggleCanvas(false)' ng-class='{tab: !showCanvas, activeTab: showCanvas}'>Whiteboard</div>
         <button class="addtab-btn" ng-click='addTextEditor(saveData); saveData();'><i class="fa fa-plus"></i></button>
         <div class='peerTypingText' ng-show='isPeerTyping'> 
@@ -25,8 +22,17 @@
     </div>
     <div ng-controller='drawingCtrl' ng-show="showCanvas" class='drawing-container'>
     </div>
-    <div ng-controller='videoCtrl' class='video-container'>
-        <video class='userVideo' muted='true' ng-src='{{userVideoSource}}' autoplay></video>
-        <video class='peerVideo' ng-src='{{peerVideoSource}}' autoplay></video>
+    <div ng-controller='videoCtrl' class="video-container" ng-class='{"flip": videoToggle}'>
+        <div><img class='rotateVideoIcon' src='../../assets/rotateIcon.png' onmouseover='this.src="../../assets/rotateIconHover.png"' onmouseout='this.src="../../assets/rotateIcon.png"' ng-click='toggleVideo()'></img></div>
+        <div class="flipper">
+            <div class="back">
+                <img class='videoPlaceholder' ng-show='!userVideoConnected' src="../../assets/noVideoIconUser.png"></img>
+                <video class='userVideo' muted='true' ng-show='userVideoConnected' ng-src='{{userVideoSource}}' autoplay></video>
+            </div>
+            <div class="front">
+                <img class='videoPlaceholder' ng-show='!peerVideoConnected' src="../../assets/noVideoIconPeer.png"></img>
+                <video class='peerVideo' ng-show='peerVideoConnected' ng-src='{{peerVideoSource}}' autoplay></video>
+            </div>
+        </div>
     </div>
 </div>

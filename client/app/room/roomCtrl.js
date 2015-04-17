@@ -19,6 +19,7 @@
     $scope.roomId = $stateParams.roomId;
     $scope.saveInterval = null;
     $scope.isPeerTyping = false;
+    $scope.videoToggle = false;
 
     var isTypingPromise = null;
     var AUTOSAVE_FREQUENCY_MS = 60000;
@@ -125,12 +126,23 @@
         TextEditor.resizeAllEditors();
       }
     };
+    
     $scope.clearCanvas = function() {
       Drawing.clearCanvas();
     };
     $scope.toggleEraser = function() {
       Drawing.toggleEraser();
     };
+
+    /**
+     * Function: RoomCtrl.toggleVideo()
+     * This function will toggle the video between the user and peer.
+     */
+    $scope.toggleVideo = function(){
+      $scope.videoToggle = !$scope.videoToggle;
+    };
+    //////////////////   End Room Methods   //////////////////
+
     // Call the initialize function
     console.log('Joining Interview with ID: ' + $stateParams.roomId);
     $scope.init();
