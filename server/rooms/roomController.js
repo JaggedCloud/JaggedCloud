@@ -106,9 +106,16 @@ module.exports.save = function(req, res) {
   var roomId = req.body.roomId;
   var canvas = req.body.canvas;
   var text = req.body.textEditor;
+  var startTime = req.body.startTime;
+  var endTime = req.body.endTime;
 
+  // if the time is invalid, simply end the function and return
+  if(roomState(startTime, endTime) === 'complete') {
+    res.status(501).send('The room state is invalid for saving');
+    return;
+  }
   // find room and update data
-  Room.findOneAndUpdate({_id: roomId}, {canvas: canvas, text: text}, {upsert: true},
+  Room.findOneAndUpdate({_id: roomId}, {canvas: canvas, text: text, notes: notes, start_time: startTime, end_time: endTime}, {upsert: true},
     function(err, room){
       // error finding room
       if (err) {
@@ -178,7 +185,7 @@ module.exports.access = function(req, res) {
       if(room) {
         console.log('Found room', room._id);
         // if the user requesting the room is the room's creator or the room is live, access is true
-        if(room.created_by = req.user || roomState(room.startTime, room.endTime) === 'live') {
+        if(room.created_by = req.user || roomState(room.start_time, room.end_time) === 'live') {
           console.log('Room', room._id, 'is accessible');
           res.status(200).send({access: true});
         // if the user requesting the room is not the room's creator and the room is not live, access is false  
