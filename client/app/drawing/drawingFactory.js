@@ -143,19 +143,18 @@
     function updateCanvas(data) {
       _pendingData = true;
       var pollCanvasStatus = function() {
-        if ( _currentlyDrawing ) {
+        if ( _currentlyDrawing ) { //wait till done drawing
           setTimeout(function() {
             pollCanvasStatus();
-          }, 1000);
+          }, 100);
         } else {
           _pendingData = false;
+          setTimeout(function() {
           _fabricCanvas.loadFromJSON(data, _fabricCanvas.renderAll.bind(_fabricCanvas));
-          sendData();
+          }, 100);
         }
-
       };
       pollCanvasStatus();
-      // _fabricCanvas.renderAll();
     }
 
     function sendData() {
