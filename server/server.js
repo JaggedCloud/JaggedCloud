@@ -45,6 +45,10 @@ io.sockets.on('connection', function(socket) {
     socket.to(socket.ROOMPROP).broadcast.emit('coordinates', data);
   });
 
+  socket.on('toggleDrawingMessage', function() {
+    socket.to(socket.ROOMPROP).broadcast.emit('toggleDrawingMessage');
+  });
+
   socket.on('clearCanvas', function() {
     socket.to(socket.ROOMPROP).broadcast.emit('clearCanvas');
   });
