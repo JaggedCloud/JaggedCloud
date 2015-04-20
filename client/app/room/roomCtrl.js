@@ -21,6 +21,8 @@
     $scope.isPeerTyping = false;
     $scope.videoToggle = false;
     $scope.open = false;
+    $scope.close = false;
+    $scope.creator = false;
     $scope.startTime;
     $scope.endTime;
 
@@ -76,8 +78,12 @@
           Drawing.updateCanvas(response.data.canvas);
         }
 
+        // assign the creator
+        $scope.creator = response.data.creator || false;
+
         // render the start and end times
-        $scope.open = response.data.start_time < new Date() && response.data.end_time > new Date();
+        $scope.open = response.data.start_time > new Date() && response.data.start_time < response.data.end_time;
+        $scope.close = response.data.end_time > new Date() && new Date() > response.data.start_time;
         $scope.startTime = new Date(response.data.start_time).toLocaleString();
         $scope.endTime = new Date(response.data.end_time).toLocaleString();
 
@@ -163,12 +169,15 @@
     $scope.openRoom = function(){
       $scope.startTime = new Date().toLocaleString();
       $scope.saveData();
+
+      // state.go($state.current...) is kind of an ugly solution.. TODO: refactor to something less jarring
+      $state.go($state.current, {}, {reload: true});
     };
 
     $scope.closeRoom= function(){
-      $scope.endTime = new Date().toLocaleString();
+      $scope.endTime = (new Date() + 60000).toLocaleString();
       $scope.saveData();
-
+      $state.go($state.current, {}, {reload: true});
     };
     //////////////////   End Room Methods   //////////////////
 

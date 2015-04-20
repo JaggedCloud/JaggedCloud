@@ -7,9 +7,9 @@
     <li class="divider-vertical"><a ng-click="toggleEraser()">Toggle Eraser</a></li>
   </ul>
     <div>
-      <button ng-show="!open" ng-click="openRoom()">Open Room</button>
-      <button ng-show="open" ng-click="closeRoom()">Close Room</button>
-      <p>start time: {{startTime}}</p><p>end time: {{endTime}}</p>
+      <button ng-show="creator && open" ng-click="openRoom()">Open Room</button>
+      <button ng-show="creator && close" ng-click="closeRoom()">Close Room</button>
+      <p ng-show="creator">start time: {{startTime}}</p><p ng-show="creator">end time: {{endTime}}</p>
     </div>
     <div class="tab-box" ng-controller='textEditorCtrl'>
             <div ng-class='{"tab-container": !editor.tab.active, "activeTab-container": editor.tab.active}' ng-click="toggleCanvas(true); setActiveEditor(editor.id)" ng-repeat='editor in editors'>
