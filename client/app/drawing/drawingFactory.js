@@ -65,7 +65,9 @@
       Sockets.emit('clearCanvas');
     }
 
-    function initializeIO() {
+    function initializeIO(isPeerDrawing) {
+      _isPeerDrawing = isPeerDrawing;
+
       console.log('Initializing Sockets IO');
       _socket = io();
 
@@ -74,14 +76,13 @@
        Sockets.emit('join room', {roomName: $stateParams.roomId});
       });
 
-      Sockets.on('toggleDrawingMessage', toggleDrawingMessage);
-
       Sockets.on('coordinates', updateCanvas);
+
       Sockets.on('clearCanvas', function() {
         _fabricCanvas.clear();
       });
 
-      _fabricCanvas.on('mouse:down', function() {
+      _fabricCanvas.on('mouse:down', function(isPeerDrawing) {
         _currentlyDrawing = true;
         Sockets.emit('toggleDrawingMessage');
       });
@@ -109,10 +110,6 @@
       _fabricCanvas.freeDrawingBrush.color = '#FFFFFF';      
       _currentlyErasing = !_currentlyErasing;
      }
-    }
-
-    function toggleDrawingMessage() {
-      console.log("STOP DRAWING YOU FOOL!"); 
     }
 
     function stopIO() {
