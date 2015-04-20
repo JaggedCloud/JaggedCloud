@@ -26,6 +26,9 @@
     <div class='textEditor-container' ng-show='!showCanvas' id='editors'>
     </div>
     <div ng-controller='drawingCtrl' ng-show="showCanvas" class='drawing-container'>
+      <div class="peerDrawingText" ng-show="isPeerDrawing">
+        Another user is drawing...
+      </div>
     </div>
     <div ng-controller='videoCtrl' class="video-container" ng-class='{"flip": videoToggle}'>
         <div><img class='rotateVideoIcon' src='../../assets/rotateIcon.png' onmouseover='this.src="../../assets/rotateIconHover.png"' onmouseout='this.src="../../assets/rotateIcon.png"' ng-click='toggleVideo()'></img></div>

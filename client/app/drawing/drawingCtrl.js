@@ -9,10 +9,11 @@
     .module('hackbox')
     .controller('drawingCtrl', DrawingCtrl);
 
-  DrawingCtrl.$inject = ['$scope', 'Drawing'];
+  DrawingCtrl.$inject = ['$scope', 'Drawing', 'Sockets'];
 
-  function DrawingCtrl($scope, Drawing) {
+  function DrawingCtrl($scope, Drawing, Sockets) {
     $scope.drawingCanvas = null;
+    $scope.isPeerDrawing = false;
     
     //The $destroy event is called when we leave this view
     $scope.$on('destroy', function() {
@@ -40,7 +41,12 @@
     };
 
     $scope.initializeIO = function() {
-      Drawing.initializeIO();
+      Drawing.initializeIO($scope.isPeerDrawing);
+      Sockets.on('toggleDrawingMessage', function() {
+        $scope.isPeerDrawing = !$scope.isPeerDrawing;
+        $scope.$digest();
+        console.log($scope.isPeerDrawing);
+      });
     };
 
     $scope.stopIOListeners = function() {

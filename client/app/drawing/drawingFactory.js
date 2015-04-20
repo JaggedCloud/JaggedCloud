@@ -65,7 +65,9 @@
       Sockets.emit('clearCanvas');
     }
 
-    function initializeIO() {
+    function initializeIO(isPeerDrawing) {
+      _isPeerDrawing = isPeerDrawing;
+
       console.log('Initializing Sockets IO');
       _socket = io();
 
@@ -75,17 +77,22 @@
       });
 
       Sockets.on('coordinates', updateCanvas);
+
       Sockets.on('clearCanvas', function() {
         _fabricCanvas.clear();
       });
 
-      _fabricCanvas.on('mouse:down', function() {
+      _fabricCanvas.on('mouse:down', function(isPeerDrawing) {
         _currentlyDrawing = true;
+        Sockets.emit('toggleDrawingMessage');
       });
+
+
 
 
       _fabricCanvas.on('mouse:up', function() {
         _currentlyDrawing = false;
+        Sockets.emit('toggleDrawingMessage');
         sendData();
       });       
     }
@@ -143,19 +150,18 @@
     function updateCanvas(data) {
       _pendingData = true;
       var pollCanvasStatus = function() {
-        if ( _currentlyDrawing ) {
+        if ( _currentlyDrawing ) { //wait till done drawing
           setTimeout(function() {
             pollCanvasStatus();
-          }, 1000);
+          }, 100);
         } else {
           _pendingData = false;
+          setTimeout(function() {
           _fabricCanvas.loadFromJSON(data, _fabricCanvas.renderAll.bind(_fabricCanvas));
-          sendData();
+          }, 100);
         }
-
       };
       pollCanvasStatus();
-      // _fabricCanvas.renderAll();
     }
 
     function sendData() {
