@@ -21,7 +21,8 @@ var roomSchema = new mongoose.Schema({
   canvas: String,
   text: [String],
   candidateName: String,
-  candidateEmail: String
+  candidateEmail: String,
+  creator: Boolean
 });
 
 

@@ -17,15 +17,23 @@ var handleError = function(error) {
 var userHasAccess = function(room, githubId) {
   var currentTime = Date.now();
 
-  if (room.created_by === githubId) {
+  if (userIsCreator(room, githubId)) {
     return true;
   }
   if (currentTime >= room.start_time && currentTime < room.end_time) {
     return true;
   }
-
   return false;
-}
+};
+
+/**
+ * userIsCreator:
+ * This function takes in room and githubId; determinues if user is the creator
+ */
+
+var userIsCreator = function(room, githubId) {
+  return room.created_by === githubId;
+};
 
 
 /**
@@ -105,6 +113,7 @@ module.exports.save = function(req, res) {
       }
       else {
         // no room found
+        // should this logic be reversed? only send back the 200 if a room is found
         if (!room){
           res.status(404).send('no room found');
         }
@@ -161,26 +170,27 @@ module.exports.fetchOne = function(req, res) {
 
   // find room by githubId
   Room.findById(roomId, function(err, room){
-    // error finding room
     if(err) { 
+    // error finding room
       handleError(err);
       res.status(404).send('error finding room');
     }
-    else {
-      // no room found
-      if(!room) {
-        res.status(404).send('no room found');
-      }
+    if(room) {
       // room found; determine if user has access
-      else {
-        if (userHasAccess(room, githubId)) {
-          res.status(200).send(room);
+      if(userHasAccess(room, githubId)) {
+        if(userIsCreator(room, githubId)) {
+          // user is creator; add creator: true property to room
+          room.creator = true;
+          console.log(room);
         }
-        else {
+        res.status(200).send(room);
+      } else {
           res.status(404).send('user currently does not have room access');
         }
+    } else {
+      // no room found
+        res.status(404).send('no room found');
       }
-    }
   });
 };
 
