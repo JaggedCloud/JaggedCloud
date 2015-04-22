@@ -1,4 +1,4 @@
-<ul ng-controller='homeCtrl' class="nav nav-tabs navbar">
+<!-- <ul ng-controller='homeCtrl' class="nav nav-tabs navbar">
   <li class="divider-vertical title"><a href="#/">HackBox</a></li>
   <li class="divider-vertical" ng-controller='signinCtrl'  ng-show='!isLoggedIn'><a ng-click='openSigninModal()' href="#/signin">Sign In</a></li>
   <li class="divider-vertical" ng-show='isLoggedIn'><a ng-click='logout()' href="/auth/logout">Logout</a></li>
@@ -6,4 +6,80 @@
   <li class="divider-vertical"><a ng-click='quickRoom()'>Demo Room</a></li>
 </ul>
 
-<h1 style="text-align: center">Landing Page</h1>
+<h1 style="text-align: center">Landing Page</h1> -->
+<div class="container landing">
+  <div class="row section1">
+    <div class="col-md-12">
+      <h1 class="title">HackBox</h1>
+      <h3 class="slogan">Hack, Track, Hire.</h3>
+      <img src="../assets/logo.png" class="logo">
+      <div class="buttonsContainer">
+        <div class="githubButtonContainer">
+          <a class="btn btn-block btn-social btn-github">
+            <i class="fa fa-github"></i> Signin with GitHub
+          </a>
+        </div>
+        <div class="demmoButtonContainer">
+          <form>
+            <input class="demoButton" type="button" value="Try out a demo!" onClick="parent.location='page.html'">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row section2">
+    <div class="col-md-4">
+      <img class="appLogos" src="../assets/fabric-logo.png">
+    </div>
+    <div class="col-md-4">
+      <img class="appLogos" src="../assets/icecomm-logo.png">
+    </div>
+    <div class="col-md-4">
+      <img class="aceLogo" src="../assets/ace-logo.png">
+    </div>
+  </div>
+  <div class="row section3">
+  </div>
+  <div class="row section4">
+    <div class="col-md-4">
+      <img class="icon" src="../assets/Code.png">
+      <p>An interactive coding environment complete with syntax highlighting.</p>
+    </div>
+    <div class="col-md-4">
+      <img class="icon" src="../assets/Canvas.png">
+      <p>Test your candidates whiteboarding skills with the canvas.</p>
+    </div>
+    <div class="col-md-4">
+      <img class="icon" src="../assets/Video.png">
+      <p>The highest quality browser-to-broswer video and audio courtesy of Icecomm.js.</p>
+    </div>
+  </div>
+  <div class="row section5">
+    <div class="col-md-4">
+      <img class="icon" src="../assets/DB.png">
+      <p>Take notes on the candidate’s interview. Review later at your convenience. </p>
+    </div>
+    <div class="col-md-4">
+      <img class="icon" src="../assets/Calendar.png">
+      <p>Easily schedule future interviews and notify candidates via our email service.</p>
+    </div>
+    <div class="col-md-4">
+      <img class="icon" src="../assets/Security.png">
+      <p>A unique, private interview ‘room’ for you and your candidate. </p>
+    </div>
+  </div>
+  <div class="row section6">
+    <div class="col-md-4">
+      <h2 class="title2">Hackbox</h2>
+    </div>
+    <div class="col-md-4">
+      <p class="copyright">Created by: Garron, Josh, Lauren, and Michael</p>
+      <p class="copyright">Copyright © 2015 - JaggedCloud</p>
+    </div>
+    <div class="col-md-4">
+      <p class="github">Find us on GitHub:</p>
+      <p class="github"><a href="github.com/JaggedCloud/JaggedCloud"> github.com/JaggedCloud/JaggedCloud</a></p>
+    </div>
+
+  </div>
+</div>
