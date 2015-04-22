@@ -1,0 +1,157 @@
+* {
+  border: 2px black solid !important ;
+}
+
+body {
+  background-color: #F1EDEB;
+
+}
+
+.section1 {
+  background: #363636;
+  border: 1px solid #979797;
+/*  width: 1024px; */
+  height: 511px;
+}
+
+.title {
+  font-family: Quicksand-Bold;
+  font-size: 72px;
+  color: #F1EDEB;
+  line-height: 88px;
+  text-align: center;
+}
+
+.logo {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: 100px;
+}
+
+.appLogos {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: 60px;
+  width: 300px;
+}
+
+.aceLogo {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: 80px;
+  width: 150px;
+}
+
+.title2 {
+  font-family: CopperplateGothic-Light;
+  font-size: 36px;
+  color: #F1EDEB;
+  line-height: 39px;
+}
+
+.slogan {
+  font-family: Quicksand-Regular;
+  font-size: 20px;
+  color: #F1EDEB;
+  line-height: 24px;
+  text-align: center;
+}
+
+.icon {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: 50px;
+  width: 50px;
+}
+
+.copyright {
+  font-family: Quicksand-Regular;
+  font-size: 10px;
+  color: #F1EDEB;
+  line-height: 12px;
+  text-align: center;
+}
+
+
+
+.githubButtonContainer {
+  float: left;
+  margin-left: 350px;
+  margin-right: 50px;
+  display: inline-block;
+  width: 200px;
+}
+
+.githubButtonContainer a {
+  background: #578A38;
+  border-radius: 3.75px;
+  font-family: Quicksand-Regular;
+  font-size: 12px;
+  color: #F1EDEB;
+}
+
+.demoButtonContainer{
+  float: right;
+  display: inline-block;
+  width: 200px;
+  height: 35px;
+}
+
+.demoButton {
+  background: #578A38;
+  border-radius: 3.75px;
+  font-family: Quicksand-Regular;
+  font-size: 12px;
+  color: #F1EDEB;
+  width: 200px;
+  height: 33px;
+}
+
+.section2 {
+  background-color: #A0A0A0;
+  border: 1px solid #979797;
+  /*width: 1024px;*/
+  height: 111px;
+}
+
+.section3 {
+  /*width: 1024px;*/
+  height: 473px;
+  background-color: #F1EDEB;
+}
+
+.section4 {
+  /*width: 1024px;*/
+  height: 321px;
+  background-color: #F1EDEB;
+}
+
+.information {
+  font-family: Quicksand-Regular;
+  font-size: 19.1px;
+  color: #363636;
+  line-height: 24px;
+}
+.section5 {
+ height: 321px;
+ background-color: #F1EDEB;
+ /*width: 1024px;*/
+}
+
+.section6 {
+ background-color: #363636;
+ /*width: 1024px;*/
+ height: 120px;
+}
+
+.github {
+  font-family: Quicksand-Bold;
+  font-size: 14px;
+  color: #F1EDEB;
+  line-height: 17px;
+  text-align: center;
+}
