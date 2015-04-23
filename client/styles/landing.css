@@ -11,7 +11,8 @@ body {
 }
 
 .title {
-  font-family: Quicksand-Bold;
+  font-family: Quicksand;
+  font-weight: bold;
   font-size: 72px;
   color: #F1EDEB;
   line-height: 88px;
@@ -49,7 +50,7 @@ body {
 }
 
 .slogan {
-  font-family: Quicksand-Regular;
+  font-family: Quicksand;
   font-size: 20px;
   color: #F1EDEB;
   line-height: 24px;
@@ -65,7 +66,7 @@ body {
 }
 
 .copyright {
-  font-family: Quicksand-Regular;
+  font-family: Quicksand;
   font-size: 10px;
   color: #F1EDEB;
   line-height: 12px;
@@ -89,7 +90,7 @@ body {
 .githubButtonContainer a {
   background: #578A38;
   border-radius: 3.75px;
-  font-family: Quicksand-Regular;
+  font-family: Quicksand;
   font-size: 12px;
   color: #F1EDEB;
 }
@@ -104,7 +105,7 @@ body {
 .demoButton {
   background: #578A38;
   border-radius: 3.75px;
-  font-family: Quicksand-Regular;
+  font-family: Quicksand;
   font-size: 12px;
   color: #F1EDEB;
   width: 200px;
@@ -131,7 +132,7 @@ body {
 }
 
 .information {
-  font-family: Quicksand-Regular;
+  font-family: Quicksand;
   font-size: 19.1px;
   color: #363636;
   line-height: 24px;
@@ -149,7 +150,8 @@ body {
 }
 
 .github {
-  font-family: Quicksand-Bold;
+  font-family: Quicksand;
+  font-weight: bold;
   font-size: 14px;
   color: #F1EDEB;
   line-height: 17px;
