@@ -67,7 +67,38 @@ module.exports = function(grunt) {
         DEST     : 'builds/production'
       },
       all: localConfig
+    },
+    concat: {
+      options: {
+        seperator: ';'
+      },
+      dist: {
+        src: ['client/app/app.js','client/app/filters.js','client/app/auth/**/*.js','client/app/home/**/*.js', 'client/app/room/**/*.js', 'client/app/video/**/*.js', 'client/app/Icecomm/**/*.js', 'client/app/sockets/**/*.js', 'client/app/drawing/**/*.js', 'client/app/texteditor/**/*.js', 'client/app/signin/**/*.js', 'client/app/schedule/**/*.js', 'client/app/404/**/*.js', 'client/app/directives/**/*.js'],
+        dest: 'client/dist/built.js'
+      }
+    },
+    uglify: {
+      options: {
+        mangle: false
+      },
+      my_target: {
+        files: {
+          'client/dest/output.min.js': ['client/dist/built.js']
+        }
+      }
+    },
+    cssmin: {
+      options: {
+        keepSpecialComments: 0
+      },
+      dist: {
+        files: {
+          'client/dist/style.min.css': ['client/styles/style.css', 'client/styles/landing.css']
+        }
+      }
     }
+    
+
   });
  
   // load the Grunt task
@@ -78,6 +109,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+
+
+
   //Server development
   grunt.registerTask('server-dev', function (target) {
       // Running nodejs in a different process and displaying output on the main console
@@ -90,6 +127,8 @@ module.exports = function(grunt) {
       nodemon.stderr.pipe(process.stderr);
 
     });
+
+  grunt.registerTask('build', ['cssmin', 'concat', 'uglify']);
 
   //will run our unit tests once and report the results in Karma
   grunt.registerTask('unit-test', ['karma:unit']);
