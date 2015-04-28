@@ -20,6 +20,8 @@
     var _currentlyErasing = false;
     var _currentlyDrawing = false;
     var _pendingData = false;
+    var _brushSize = 6;
+    var _eraserSize = 20;
 
     var instance = {
       makeCanvas: makeCanvas,
@@ -56,6 +58,8 @@
 
       _fabricCanvas.setHeight(2000);
       _fabricCanvas.setWidth(2000);
+      _fabricCanvas.freeDrawingBrush.width = _brushSize;
+
 
       return _fabricCanvas;
     }
@@ -99,14 +103,14 @@
 
     function toggleEraser() {
      if (_currentlyErasing ) {
-      _fabricCanvas.freeDrawingBrush = new fabric['Pencil' + 'Brush'](_fabricCanvas);
-      _fabricCanvas.freeDrawingBrush.width = 1;
+      // _fabricCanvas.freeDrawingBrush = new fabric['Pencil' + 'Brush'](_fabricCanvas);
+      _fabricCanvas.freeDrawingBrush.width = _brushSize;
       _fabricCanvas.freeDrawingBrush.color = '#000000';
       _currentlyErasing = !_currentlyErasing;
 
      } else {
-      _fabricCanvas.freeDrawingBrush = new fabric['Circle' + 'Brush'](_fabricCanvas);
-      _fabricCanvas.freeDrawingBrush.width = 20;
+      // _fabricCanvas.freeDrawingBrush = new fabric['Circle' + 'Brush'](_fabricCanvas);
+      _fabricCanvas.freeDrawingBrush.width = _eraserSize;
       _fabricCanvas.freeDrawingBrush.color = '#FFFFFF';      
       _currentlyErasing = !_currentlyErasing;
      }
