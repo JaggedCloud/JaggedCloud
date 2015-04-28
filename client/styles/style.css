@@ -1,6 +1,6 @@
 body { 
   font-family: 'Quicksand', sans-serif;
-  color: #000;
+  color: #363636;
   font-weight: 300;
   background-color: #F1EDEB;
   -webkit-background-size: cover;
@@ -11,6 +11,7 @@ body {
 
 .dateLabel{
   font-size: 30px;
+  font-weight: 600;
   /*text-shadow: 4px 4px 4px #aaa;*/
 }
 
@@ -47,7 +48,7 @@ a:visited {
 }
 
 a:visited:hover {
-  color: white;
+  color: #326B8B;
   text-decoration: none;
 }
 
@@ -117,36 +118,57 @@ li{
   width: 70%;
   border-radius: 0 10px 10px 10px;
   padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .interview{
-  width: 70%;
-  box-shadow: 0px 8px 10px 0px #A0A0A0;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50px;
-  background-color: #326B8B;
-  height: 130px;
+  width: 95%;
+  box-shadow: 0px 4px 5px 0px #A0A0A0;
+  margin: 0 auto 40px;
+  background-color: #8FC7CB;
+  height: 160px;
   text-align:center;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .interviewLeft {
+  position: relative;
   float: left;
-  width: 50%;
+  width: 49%;
+  height: 96%;
 }
 
 .interviewRight {
+  position: relative;
   float: right;
-  width: 50%;
+  width: 49%;
+  height: 95%;
 }
 
 .innerInterview {
-  padding: 10px;
+  padding: 20px;
 }
 
 .interview:hover{
-  background: #6895AD;
+  background: #46A198;
   cursor: pointer;
+}
+
+.email {
+  font-size: 80%;
+  width: 100%;
+  /*max-width: 130px;*/
+}
+
+.email-container {
+  float: left;
+  word-wrap: break-word;
+  width: 400px;
+}
+
+.email-container-icon {
+  float: left;
 }
 
 .signin {
@@ -173,7 +195,7 @@ li{
 }
 
 .schedule {
-  background-color: #326B8B;
+  background-color: #8FC7CB;
   color: #000;
   border: 1px solid #fff;
   font-weight: 100;
