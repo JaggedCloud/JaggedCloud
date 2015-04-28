@@ -135,14 +135,14 @@ li{
 .interviewLeft {
   position: relative;
   float: left;
-  width: 49%;
+  width: 46%;
   height: 96%;
 }
 
 .interviewRight {
   position: relative;
   float: right;
-  width: 49%;
+  width: 46%;
   height: 95%;
 }
 
