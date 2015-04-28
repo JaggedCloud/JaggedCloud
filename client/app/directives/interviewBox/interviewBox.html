@@ -1,19 +1,23 @@
-
 <div class='innerInterview'>
-  <div class="close" ng-click="$event.stopPropagation()"><a ng-click='removeFn(interview.roomId)'><i class="fa fa-times"></i></a></div>
-  <h3><div class='interviewLeft'>
-    <ul>
-      <li> <i class="fa fa-calendar"></i> {{interview.displayed_date}} </li>
-      <br>
-      <li> <i class="fa fa-clock-o"></i> {{interview.displayed_time}} </li>
-    </ul>
-  </div></h3>
+<div class="close" ng-click="$event.stopPropagation()"><a ng-click='removeFn(interview.roomId)'><i class="fa fa-times"></i></a></div>
 
-  <h3><div class='interviewRight'>
+  <div class='interviewLeft'>
     <ul>
-      <li class='name'><i class="fa fa-user"></i> {{interview.candidateName}} </li>
-      <br>
-      <li class='email'><i class="fa fa-envelope-o"></i> {{interview.candidateEmail}} </li>
+      <li><h3><i class="fa fa-calendar"></i> {{interview.displayed_date}} </h3></li>
+      <li><h3><i class="fa fa-clock-o"></i> {{interview.displayed_time}} </h3></li>
     </ul>
-  </div></h3>
+  </div>
+
+  <div class='interviewRight'>
+    <ul>
+      <li class='name'><h3><i class="fa fa-user"></i> {{interview.candidateName}} </h3></li>
+      <li class='email'>
+        <h3>
+          <i class="fa fa-envelope-o" ng-class="{{ interview.candidateEmail.length > 24 }} ? 'email-container-icon' : ''"></i>
+          <span ng-class="{{ interview.candidateEmail.length > 24 }} ? 'email-container' : ''">{{interview.candidateEmail}} </span>
+        </h3>
+      </li>
+    </ul>
+  </div>
+
 </div>
