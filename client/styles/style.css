@@ -1,6 +1,6 @@
 body { 
   font-family: 'Quicksand', sans-serif;
-  color: #000;
+  color: #363636;
   font-weight: 300;
   background-color: #F1EDEB;
   -webkit-background-size: cover;
@@ -11,6 +11,7 @@ body {
 
 .dateLabel{
   font-size: 30px;
+  font-weight: 600;
   /*text-shadow: 4px 4px 4px #aaa;*/
 }
 
@@ -47,7 +48,7 @@ a:visited {
 }
 
 a:visited:hover {
-  color: white;
+  color: #326B8B;
   text-decoration: none;
 }
 
@@ -124,7 +125,7 @@ li{
   width: 95%;
   box-shadow: 0px 4px 5px 0px #A0A0A0;
   margin: 0 auto 40px;
-  background-color: #8FDB94;
+  background-color: #8FC7CB;
   height: 160px;
   text-align:center;
   overflow: hidden;
@@ -150,7 +151,7 @@ li{
 }
 
 .interview:hover{
-  background: #6895AD;
+  background: #46A198;
   cursor: pointer;
 }
 
@@ -194,7 +195,7 @@ li{
 }
 
 .schedule {
-  background-color: #326B8B;
+  background-color: #8FC7CB;
   color: #000;
   border: 1px solid #fff;
   font-weight: 100;
