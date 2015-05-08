@@ -15,7 +15,7 @@ HackBox is a simple to use, all-in-one technical interview platform empowering i
 
 ## Deployed Link
 
-http://hackbox.herokuapp.com/
+http://www.hackbox.me
 
 
 ##Status
