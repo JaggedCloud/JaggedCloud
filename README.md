@@ -41,7 +41,7 @@ http://www.hackbox.me
 2. Clone a copy of the repository locally
 3. Run npm install
 4. Run bower install
-5. Run sudo grunt devmode and enter your computer's adminstrator password. This grunt command will do the following:
+5. Run sudo grunt devmode and enter your computer's administrator password. This grunt command will do the following:
     1. Set environmental variables and API Keys
     2. Start up your local Mongo Database and make it begin listening for connections
     3. Spawn a grunt process to start up the server via nodemon
